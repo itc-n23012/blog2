@@ -1,9 +1,10 @@
-const Hero = ({ title, subtitle, imageOn = false }) => {
+import styles from 'styles/hero.module.css'
+const Hero = (props = { imageOn: false }) => {
   return (
     <div>
-      <h1>{title}</h1>
-      <p>{subtitle}</p>
-      {imageOn && <figure>[画像]</figure>}
+      <h1 className={styles.title}>{props.title}</h1>
+      <p className={styles.subtitle}>{props.subtitle}</p>
+      {props.imageOn && <figure> [画像] </figure>}
     </div>
   )
 }
