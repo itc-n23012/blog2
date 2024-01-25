@@ -1,11 +1,10 @@
-import Layout from 'component/layout'
-import Hero from 'component/hero'
+import Hero from 'components/hero'
 const Home = () => {
+  const props = { title: 'CUBE', subtitle: 'アウトプットしていくサイト' }
   return (
     <>
-      <Layout>
-        <Hero />
-      </Layout>
+      <Hero {...props} />
+      imageOn
     </>
   )
 }
