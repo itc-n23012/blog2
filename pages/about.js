@@ -7,7 +7,7 @@ import {
   TwoColumnMain,
   TwoColumnSidebar
 } from 'components/two-column'
-import Images from 'next/image'
+import Image from 'next/image'
 import eyecatch from 'images/about.jpg'
 const About = () => {
   const props2 = { title: 'About', subtitle: 'About development activities' }
