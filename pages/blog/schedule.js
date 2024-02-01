@@ -10,10 +10,19 @@ import {
 import ConvertBody from 'components/convert-body'
 import PostCategories from 'components/post-categories'
 import Image from 'next/image'
+import { extractText } from 'lib/extract-text'
+import Meta from 'components/meta'
 
 const Schedule = props => {
   return (
     <Container>
+      <Meta
+        pageTitle={props.title}
+        pageDesc={props.description}
+        pageImg={props.eyecatch.url}
+        pageImgW={props.eyecatch.width}
+        pageImgH={props.eyecatch.height}
+      />
       <article>
         <PostHeader
           title={props.title}
@@ -51,13 +60,16 @@ export const getStaticProps = async () => {
   const slug = 'schedule'
 
   const post = await getPostBySlug(slug)
+
+  const description = extractText(post.content)
   return {
     props: {
       title: post.title,
       publish: post.publishDate,
       content: post.content,
       eyecatch: post.eyecatch,
-      categories: post.categories
+      categories: post.categories,
+      description: description
     }
   }
 }
