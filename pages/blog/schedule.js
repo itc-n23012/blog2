@@ -1,10 +1,17 @@
 import { getPostBySlug } from 'lib/api'
 import Container from 'components/container'
+import PostHeader from 'components/post-header'
 
 const Schedule = props => {
   return (
     <Container>
-      <h1>{props.title}</h1>
+      <article>
+        <PostHeader
+          title={props.title}
+          subtitle='Blog Article'
+          publish={props.publish}
+        />
+      </article>
     </Container>
   )
 }
