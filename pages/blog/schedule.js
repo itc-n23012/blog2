@@ -1,6 +1,7 @@
 import { getPostBySlug } from 'lib/api'
 import Container from 'components/container'
 import PostHeader from 'components/post-header'
+import Image from 'next/image'
 
 const Schedule = props => {
   return (
@@ -11,6 +12,17 @@ const Schedule = props => {
           subtitle='Blog Article'
           publish={props.publish}
         />
+        <figure>
+          <Image
+            src={props.eyecatch.url}
+            alt=''
+            layout='responsive'
+            width={props.eyecatch.width}
+            height={props.eyecatch.height}
+            sizes='(min-width: 1152px) 1152px, 100vw'
+            priority
+          />
+        </figure>
       </article>
     </Container>
   )
