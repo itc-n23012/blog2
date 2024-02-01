@@ -8,6 +8,7 @@ import {
   TwoColumnSidebar
 } from 'components/two-column'
 import ConvertBody from 'components/convert-body'
+import PostCategories from 'components/post-categories'
 import Image from 'next/image'
 
 const Schedule = props => {
@@ -36,7 +37,9 @@ const Schedule = props => {
               <ConvertBody contentHTML={props.content} />
             </PostBody>
           </TwoColumnMain>
-          <TwoColumnSidebar></TwoColumnSidebar>
+          <TwoColumnSidebar>
+            <PostCategories categories={props.categories} />
+          </TwoColumnSidebar>
         </TwoColumn>
       </article>
     </Container>
