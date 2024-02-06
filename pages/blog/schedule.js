@@ -12,6 +12,8 @@ import PostCategories from 'components/post-categories'
 import Image from 'next/image'
 import { extractText } from 'lib/extract-text'
 import Meta from 'components/meta'
+import { eyecatchLocal } from 'lib/constants'
+import { getPlaiceholder } from 'plaiceholder'
 
 const Schedule = props => {
   return (
@@ -37,7 +39,8 @@ const Schedule = props => {
             width={props.eyecatch.width}
             height={props.eyecatch.height}
             sizes='(min-width: 1152px) 1152px, 100vw'
-            priority
+            priority='blur'
+            blurDateURL={props.eyecatch.blurDateURL}
           />
         </figure>
         <TwoColumn>
@@ -57,17 +60,20 @@ const Schedule = props => {
 export default Schedule
 
 export const getStaticProps = async () => {
-  const slug = 'schedule'
+  const slug = 'micro'
 
   const post = await getPostBySlug(slug)
 
   const description = extractText(post.content)
+  const eyecatch = post.eyecatch ?? eyecatchLocal
+  const { base64 } = await getPlaiceholder(eyecatch.url)
+  eyecatch.blurDateURL = base64
   return {
     props: {
       title: post.title,
       publish: post.publishDate,
       content: post.content,
-      eyecatch: post.eyecatch,
+      eyecatch: eyecatch,
       categories: post.categories,
       description: description
     }
