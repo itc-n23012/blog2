@@ -9,8 +9,10 @@ import {
 } from 'components/two-column'
 import ConvertBody from 'components/convert-body'
 import PostCategories from 'components/post-categories'
+import Pagination from 'components/pagination'
 import Image from 'next/image'
 import { extractText } from 'lib/extract-text'
+import { prevNextPost } from 'lib/prev-next-post'
 import Meta from 'components/meta'
 import { eyecatchLocal } from 'lib/constants'
 import { getPlaiceholder } from 'plaiceholder'
@@ -53,6 +55,12 @@ const Post = props => {
             <PostCategories categories={props.categories} />
           </TwoColumnSidebar>
         </TwoColumn>
+        <Pagination
+          prevText={props.prevPost.title}
+          prevUrl={`/blog/${props.prevPost.slug}`}
+          nextText={props.nextPost.title}
+          nextUrl={`/blog/${props.nextPost.slug}`}
+        />
       </article>
     </Container>
   )
@@ -76,6 +84,9 @@ export const getStaticProps = async context => {
   const eyecatch = post.eyecatch ?? eyecatchLocal
   const { base64 } = await getPlaiceholder(eyecatch.url)
   eyecatch.blurDateURL = base64
+
+  const allSlugs = await getAllSlugs()
+  const [prevPost, nextPost] = prevNextPost(allSlugs, slug)
   return {
     props: {
       title: post.title,
@@ -83,7 +94,9 @@ export const getStaticProps = async context => {
       content: post.content,
       eyecatch: eyecatch,
       categories: post.categories,
-      description: description
+      description: description,
+      prevPost: prevPost,
+      nextPost: nextPost
     }
   }
 }
