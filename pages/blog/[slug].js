@@ -35,6 +35,7 @@ const Post = props => {
         />
         <figure>
           <Image
+            key={props.eyecatch.url}
             src={props.eyecatch.url}
             alt=''
             layout='responsive'
